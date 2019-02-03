@@ -31,8 +31,6 @@ export const fetchPostsAsync = () => async (dispatch) => {
     const response = await api.posts.fetch();
     const result = await response.json();
 
-    console.log(result);
-
     dispatch(fillPosts(result.data));
 };
 
