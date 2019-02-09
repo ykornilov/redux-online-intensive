@@ -6,7 +6,6 @@ import FlipMove from 'react-flip-move';
 
 // Instruments
 import Styles from './styles.m.css';
-import { mockedProfile } from '../../instruments/mockedData';
 
 // Components
 import { Composer, Catcher, Post } from '../../components';
@@ -16,7 +15,8 @@ import { postsActions } from '../../bus/posts/actions';
 
 const mapStateToProps = (state) => {
     return {
-        posts: state.posts,
+        profile: state.profile,
+        posts:   state.posts,
     };
 };
 
@@ -34,11 +34,6 @@ const mapDispatchToProps = (dispatch) => {
     mapDispatchToProps
 )
 export default class Posts extends Component {
-    static defaultProps = {
-        // State
-        profile: mockedProfile,
-    };
-
     componentDidMount () {
         const { actions } = this.props;
 
