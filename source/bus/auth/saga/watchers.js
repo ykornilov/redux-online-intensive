@@ -15,6 +15,24 @@ function* watchLogin () {
     yield takeEvery(types.LOGIN_ASYNC, workers.login);
 }
 
+function* watchAuthenticate () {
+    yield takeEvery(types.AUTHENTICATE_ASYNC, workers.authenticate);
+}
+
+function* watchInitialize () {
+    yield takeEvery(types.INITIALIZE_ASYNC, workers.initialize);
+}
+
+function* watchLogout () {
+    yield takeEvery(types.LOGOUT_ASYNC, workers.logout);
+}
+
 export function* watchAuth () {
-    yield all([call(watchSignup), call(watchLogin)]);
+    yield all([
+        call(watchSignup),
+        call(watchLogin),
+        call(watchAuthenticate),
+        call(watchInitialize),
+        call(watchLogout)
+    ]);
 }

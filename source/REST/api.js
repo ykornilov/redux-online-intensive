@@ -2,6 +2,9 @@
 import { MAIN_URL, groupId } from './config';
 
 export const api = {
+    get token () {
+        return localStorage.getItem('token');
+    },
     auth: {
         signup (userInfo) {
             return fetch(`${MAIN_URL}/user/${groupId}`, {
@@ -12,13 +15,30 @@ export const api = {
                 body: JSON.stringify(userInfo),
             });
         },
-        login (loginInfo) {
+        login (credentials) {
             return fetch(`${MAIN_URL}/user/login`, {
                 method:  'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(loginInfo),
+                body: JSON.stringify(credentials),
+            });
+        },
+        authenticate () {
+            return fetch(`${MAIN_URL}/user/login`, {
+                method:  'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ token: this.token }),
+            });
+        },
+        logout () {
+            return fetch(`${MAIN_URL}/user/logout`, {
+                method:  'GET',
+                headers: {
+                    'Authorization': this.token,
+                },
             });
         },
     },
@@ -27,7 +47,7 @@ export const api = {
             return fetch(`${MAIN_URL}/feed`, {
                 method:  'GET',
                 headers: {
-                    'x-no-auth': groupId,
+                    'Authorization': this.token,
                 },
             });
         },
@@ -36,8 +56,8 @@ export const api = {
             return fetch(`${MAIN_URL}/feed`, {
                 method:  'POST',
                 headers: {
-                    'x-no-auth':    groupId,
-                    'Content-type': 'application/json',
+                    'Authorization': this.token,
+                    'Content-type':  'application/json',
                 },
                 body: JSON.stringify({ comment }),
             });
