@@ -51,7 +51,6 @@ export const api = {
                 },
             });
         },
-
         create (comment) {
             return fetch(`${MAIN_URL}/feed`, {
                 method:  'POST',
@@ -60,6 +59,14 @@ export const api = {
                     'Content-type':  'application/json',
                 },
                 body: JSON.stringify({ comment }),
+            });
+        },
+        remove (postId) {
+            return fetch(`${MAIN_URL}/feed/${postId}`, {
+                method:  'DELETE',
+                headers: {
+                    'Authorization': this.token,
+                },
             });
         },
     },

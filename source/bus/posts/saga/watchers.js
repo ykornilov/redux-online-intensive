@@ -15,6 +15,14 @@ function* watchFetchPosts () {
     yield takeEvery(types.FETCH_POSTS_ASYNC, workers.fetchPosts);
 }
 
+function* watchRemovePost () {
+    yield takeEvery(types.REMOVE_POST_ASYNC, workers.removePost);
+}
+
 export function* watchPosts () {
-    yield all([call(watchCreatePost), call(watchFetchPosts)]);
+    yield all([
+        call(watchCreatePost),
+        call(watchFetchPosts),
+        call(watchRemovePost)
+    ]);
 }
