@@ -19,10 +19,15 @@ function* watchRemovePost () {
     yield takeEvery(types.REMOVE_POST_ASYNC, workers.removePost);
 }
 
+function* watchLikePost () {
+    yield takeEvery(types.LIKE_POST_ASYNC, workers.likePost);
+}
+
 export function* watchPosts () {
     yield all([
         call(watchCreatePost),
         call(watchFetchPosts),
-        call(watchRemovePost)
+        call(watchRemovePost),
+        call(watchLikePost)
     ]);
 }
