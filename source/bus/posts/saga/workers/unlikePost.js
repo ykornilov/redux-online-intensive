@@ -6,7 +6,7 @@ import { api } from '../../../../REST';
 import { postsActions } from '../../actions';
 import { uiActions } from '../../../ui/actions';
 
-export function* likePost ({ payload: postId }) {
+export function* unlikePost ({ payload: postId }) {
     try {
         yield put(uiActions.startFetching());
 
@@ -18,14 +18,13 @@ export function* likePost ({ payload: postId }) {
             throw new Error(message);
         }
 
-        const liker = yield select((state) => {
-            return state.profile.remove('avatar').remove('token');
-            // return state.profile.removeAll(['avatar', 'token');
+        const likerId = yield select((state) => {
+            return state.profile.get('id');
         });
 
-        yield put(postsActions.likePost({ liker, postId }));
+        yield put(postsActions.unlikePost({ likerId, postId }));
     } catch (error) {
-        yield put(uiActions.emitError(error, 'likePost worker'));
+        yield put(uiActions.emitError(error, 'unlikePost worker'));
     } finally {
         yield put(uiActions.stopFetching());
     }
