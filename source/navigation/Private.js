@@ -20,6 +20,7 @@ export default class App extends Component {
 
     componentWillUnmount () {
         socket.removeListener('create');
+        socket.removeListener('remove');
         socket.removeListener('like');
     }
 
