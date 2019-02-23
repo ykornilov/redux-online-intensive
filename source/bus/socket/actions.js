@@ -20,9 +20,9 @@ export const socketActions = {
             dispatch(postsActions.createPost(post));
         });
         socket.on('remove', (event) => {
-            const { data: post } = JSON.parse(event);
+            const { data: postId } = JSON.parse(event);
 
-            dispatch(postsActions.removePost(post));
+            dispatch(postsActions.removePost(postId));
         });
 
         socket.on('like', (event) => {
