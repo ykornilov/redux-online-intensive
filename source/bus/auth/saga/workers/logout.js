@@ -1,6 +1,7 @@
 // Core
 import { put, apply } from 'redux-saga/effects';
 import { replace } from 'react-router-redux';
+import { actions } from 'react-redux-form';
 
 // Instruments
 import { api } from '../../../../REST';
@@ -32,6 +33,7 @@ export function* logout () {
         yield put(profileActions.clearProfile());
         yield put(uiActions.stopFetching());
         yield put(authActions.logout());
+        yield put(actions.reset('forms.user'));
         yield put(replace(book.login));
     }
 }
