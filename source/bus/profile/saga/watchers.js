@@ -15,9 +15,14 @@ function* watchUpdateAvatar () {
     yield takeEvery(types.UPDATE_AVATAR_ASYNC, workers.updateAvatar);
 }
 
+function* watchUpdatePassword () {
+    yield takeEvery(types.UPDATE_PASSWORD_ASYNC, workers.updatePassword);
+}
+
 export function* watchProfile () {
     yield all([
         call(watchUpdateName),
-        call(watchUpdateAvatar)
+        call(watchUpdateAvatar),
+        call(watchUpdatePassword)
     ]);
 }
