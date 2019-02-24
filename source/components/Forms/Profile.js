@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, Control } from 'react-redux-form';
 import cx from 'classnames';
-import { Map } from 'immutable';
 
 // Instruments
 import Styles from './styles.m.css';
@@ -31,12 +30,6 @@ const mapDispatchToProps = profileActions;
     mapDispatchToProps
 )
 export default class Profile extends Component {
-    static defaultProps = {
-        // Actions
-        updateNameAsync:   () => {},
-        updateAvatarAsync: () => {},
-    };
-
     _submitUserInfo = (userInfo) => {
         const { updateNameAsync, updateAvatarAsync } = this.props;
 
