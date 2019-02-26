@@ -6,11 +6,14 @@ import { api } from '../../../../REST';
 import { uiActions } from '../../../ui/actions';
 import { authActions } from '../../../auth/actions';
 
-export function* updatePassword ({ payload: passwordData }) {
+export function* updatePassword ({ payload: { oldPassword, newPassword }}) {
     try {
         yield put(uiActions.startFetching());
 
-        const response = yield apply(api, api.profile.updateProfile, [passwordData]);
+        const response = yield apply(api, api.profile.updateProfile, [{
+            oldPassword,
+            newPassword,
+        }]);
         const { message } = yield apply(response, response.json);
 
         if (response.status !== 200) {
