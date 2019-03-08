@@ -9,6 +9,15 @@ Object {
 }
 `;
 
+exports[`UI actions: emitError with meta-data 1`] = `
+Object {
+  "error": true,
+  "meta": "worker",
+  "payload": [Error],
+  "type": "EMIT_ERROR",
+}
+`;
+
 exports[`UI actions: setOfflineState 1`] = `
 Object {
   "type": "STATE_OFFLINE_STATE",
