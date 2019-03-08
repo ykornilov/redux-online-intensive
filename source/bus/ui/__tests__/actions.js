@@ -21,4 +21,8 @@ describe('UI actions:', () => {
     test('emitError', () => {
         expect(uiActions.emitError(new Error())).toMatchSnapshot();
     });
+
+    test('emitError with meta-data', () => {
+        expect(uiActions.emitError(new Error(), 'worker')).toMatchSnapshot();
+    });
 });
